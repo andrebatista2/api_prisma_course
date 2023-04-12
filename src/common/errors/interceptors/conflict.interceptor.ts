@@ -1,22 +1,22 @@
 import {
   CallHandler,
+  ConflictException,
   ExecutionContext,
   Injectable,
   NestInterceptor,
-  NotFoundException,
 } from '@nestjs/common';
 import { Observable, catchError } from 'rxjs';
-import { NotFoundError } from '../types/NotFoundError';
+import { ConflictError } from '../types/ConflictError';
 
 @Injectable()
-export class NotFoundInterceptor implements NestInterceptor {
+export class ConflictInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     return next.handle().pipe(
       catchError(error => {
-        if (error instanceof NotFoundError) {
-          throw new NotFoundException(error.message);
+        if (error instanceof ConflictError) {
+          throw new ConflictException(error.message);
         } else {
-          throw Error;
+          throw error;
         }
       }),
     );
