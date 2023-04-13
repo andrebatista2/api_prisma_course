@@ -35,6 +35,11 @@ export class UsersService {
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
+    const user = await this.repository.findOne(id);
+    if (!user) {
+      throw new NotFoundError('Usuário não encontrado na base de dados');
+    }
+
     return this.repository.update(id, updateUserDto);
   }
 
