@@ -1,10 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserRepository } from './repositories/user.repository';
 import { UserEntity } from './entities/user.entity';
 import { NotFoundError } from '../common/errors/types/NotFoundError';
-import { UnauthorizedError } from '../common/errors/types/UnauthorizedError';
 
 @Injectable()
 export class UsersService {
